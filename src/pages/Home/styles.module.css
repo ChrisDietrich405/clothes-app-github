@@ -1,0 +1,22 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+button {
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  border: none;
+  background: #add8e6;
+}
+
+button:hover {
+  cursor: pointer;
+}
