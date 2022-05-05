@@ -1,0 +1,11 @@
+.product_container {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 40px;
+}
+
+img {
+  width: 150px;
+}
