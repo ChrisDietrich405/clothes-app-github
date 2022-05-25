@@ -13,9 +13,9 @@ const Navbar = () => {
         </div>
         <div className={styles.links_container}>
           <ul>
-            <li>
+            {/* <li>
               <Link to="about-us">About</Link>
-            </li>
+            </li> */}
 
             <li>Our Story</li>
             <li>Contact Us</li>
