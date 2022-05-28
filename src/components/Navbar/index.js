@@ -13,13 +13,16 @@ const Navbar = () => {
         </div>
         <div className={styles.links_container}>
           <ul>
-            {/* <li>
-              <Link to="about-us">About</Link>
-            </li> */}
+            <li>
+              <Link to="about-us">About Us</Link>
+            </li>
 
             <li>Our Story</li>
             <li>Contact Us</li>
             <li>Additional Stuff</li>
+            <Link to="/cart">
+              <span class="material-symbols-outlined">shopping_cart</span>
+            </Link>
           </ul>
         </div>
       </div>

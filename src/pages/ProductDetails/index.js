@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import { api } from "../../services/api";
@@ -12,6 +13,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
 
   const params = useParams();
+  const navigate = useNavigate();
 
   const fetchProductDetails = async () => {
     const response = await api.get(`/products/${params.details}`);
@@ -20,7 +22,12 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    setCartProducts([...cartProducts, { ...productData }]);
+    const products = [...cartProducts, { ...productData }];
+    setCartProducts(products);
+    if (loading === false) {
+      localStorage.setItem("cartProducts", JSON.stringify(products));
+    }
+    navigate("/cart");
   };
 
   useEffect(() => {
@@ -36,19 +43,13 @@ const ProductDetails = () => {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    if (loading === false) {
-      localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-    }
-  }, [cartProducts]);
-
   return (
     <div className={styles.product_details_container}>
       <h4>{productData.title}</h4>
       <img src={productData.image} alt={productData.title} />
       <p>{productData.description}</p>
       <button onClick={handleAddToCart}>Add to Cart</button>
-      <Cart cartProducts={cartProducts} />
+      {/* <Cart cartProducts={cartProducts} /> */}
     </div>
   );
 };
