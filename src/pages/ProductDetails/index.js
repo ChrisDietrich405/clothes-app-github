@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import { api } from "../../services/api";
-import Cart from "../../components/Cart";
 
 import styles from "./styles.module.css";
 

@@ -5,21 +5,63 @@ import styles from "./styles.module.css";
 
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
+  const [cartTotal, setCartTotal] = useState({});
 
   const navigate = useNavigate();
 
-  const cartProductTotals = cartProducts.reduce(
-    (total, cartProduct) => {
-      const { price } = cartProduct;
-      total.totalItems++;
-      total.totalPrice += price;
-      return total;
-    },
-    {
-      totalItems: 0,
-      totalPrice: 0,
-    }
-  );
+  // const cartProductTotals = cartProducts.reduce(
+  //   (total, cartProduct) => {
+  //     const { price } = cartProduct;
+  //     total.totalItems++;
+  //     total.totalPrice += price;
+  //     return total;
+  //   },
+  //   {
+  //     totalItems: 0,
+  //     totalPrice: 0,
+  //   }
+  // );
+
+  const updateCartTotal = () => {
+    setCartTotal(
+      cartProducts.reduce(
+        (total, cartProduct) => {
+          const { price } = cartProduct;
+          total.totalItems++;
+          total.totalPrice += price * cartProduct.total;
+          return total;
+        },
+        {
+          totalItems: 0,
+          totalPrice: 0,
+        }
+      )
+    );
+  };
+
+  const subtractItem = (id) => {
+    const updatedItems = cartProducts.map((product) => {
+      if (product.total <= 0) {
+        return { ...product, total: (product.total = 0) };
+      } else if (product.id === id) {
+        return { ...product, total: product.total - 1 };
+      } else {
+        return product;
+      }
+    });
+    setCartProducts(updatedItems);
+  };
+
+  const addItem = (id) => {
+    const updatedItems = cartProducts.map((product) => {
+      if (product.id === id) {
+        return { ...product, total: product.total + 1 };
+      } else {
+        return product;
+      }
+    });
+    setCartProducts(updatedItems);
+  };
 
   useEffect(() => {
     const localStorageProducts = localStorage.getItem("cartProducts");
@@ -31,6 +73,7 @@ const Cart = () => {
         (arrayProduct) => arrayProduct.id === cartProduct.id
       );
       if (index !== -1) {
+        //don't understand
         productsArray[index].total++;
       } else {
         const newProduct = { ...cartProduct, total: 1 };
@@ -39,6 +82,10 @@ const Cart = () => {
     });
     setCartProducts(productsArray);
   }, []);
+
+  useEffect(() => {
+    updateCartTotal();
+  }, [cartProducts]);
 
   return (
     <div className={styles.cart_container}>
@@ -50,7 +97,12 @@ const Cart = () => {
               <div className={styles.product_information_container}>
                 <h4>{product.title}</h4>
                 <strong>${product.price}</strong>
-                <p>Total: {product.total}</p>
+                <p>
+                  Total:{" "}
+                  <button onClick={() => subtractItem(product.id)}>-</button>{" "}
+                  {product.total}{" "}
+                  <button onClick={() => addItem(product.id)}>+</button>
+                </p>
               </div>
             </div>
           );
@@ -58,8 +110,8 @@ const Cart = () => {
       </ul>
       <div className={styles.cart_summary_container}>
         <h3>Cart Summary</h3>
-        <p>Total: {cartProductTotals.totalItems}</p>
-        <p>Total Price: ${cartProductTotals.totalPrice}</p>
+        <p>Total: {cartTotal.totalItems}</p>
+        <p>Total Price: ${cartTotal.totalPrice?.toFixed(2)}</p>
         <button onClick={() => navigate("/products")}>Back to Products</button>
       </div>
     </div>
