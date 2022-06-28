@@ -13,6 +13,9 @@ const Navbar = () => {
         </div>
         <div className={styles.links_container}>
           <ul>
+            <Link to="/login">
+              <li>Log In</li>
+            </Link>
             <li>
               <Link to="about-us">About Us</Link>
             </li>

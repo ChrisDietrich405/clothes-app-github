@@ -9,19 +9,6 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-  // const cartProductTotals = cartProducts.reduce(
-  //   (total, cartProduct) => {
-  //     const { price } = cartProduct;
-  //     total.totalItems++;
-  //     total.totalPrice += price;
-  //     return total;
-  //   },
-  //   {
-  //     totalItems: 0,
-  //     totalPrice: 0,
-  //   }
-  // );
-
   const updateCartTotal = () => {
     setCartTotal(
       cartProducts.reduce(
@@ -50,6 +37,7 @@ const Cart = () => {
       }
     });
     setCartProducts(updatedItems);
+    localStorage.setItem("cartProducts", JSON.stringify(updatedItems));
   };
 
   const addItem = (id) => {
@@ -61,26 +49,13 @@ const Cart = () => {
       }
     });
     setCartProducts(updatedItems);
+    localStorage.setItem("cartProducts", JSON.stringify(updatedItems));
   };
 
   useEffect(() => {
     const localStorageProducts = localStorage.getItem("cartProducts");
     const products = JSON.parse(localStorageProducts);
-
-    const productsArray = [];
-    products.forEach((cartProduct) => {
-      const index = productsArray.findIndex(
-        (arrayProduct) => arrayProduct.id === cartProduct.id
-      );
-      if (index !== -1) {
-        //don't understand
-        productsArray[index].total++;
-      } else {
-        const newProduct = { ...cartProduct, total: 1 };
-        productsArray.push(newProduct);
-      }
-    });
-    setCartProducts(productsArray);
+    setCartProducts(products);
   }, []);
 
   useEffect(() => {

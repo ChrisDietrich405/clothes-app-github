@@ -21,10 +21,28 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    const products = [...cartProducts, { ...productData }];
-    setCartProducts(products);
+    // const products = [...cartProducts, { ...productData }];
+    // setCartProducts(products);
+    let newCartProducts = [];
+    const index = cartProducts.findIndex(
+      (cartProduct) => cartProduct.id === productData.id
+    );
+    if (index !== -1) {
+      newCartProducts = cartProducts.map((cartProduct) => {
+        if (cartProduct.id === productData.id) {
+          return { ...cartProduct, total: cartProduct.total + 1 };
+        } else {
+          return cartProduct;
+        }
+      });
+      setCartProducts(newCartProducts);
+    } else {
+      newCartProducts = [...cartProducts, { ...productData, total: 1 }];
+      setCartProducts(newCartProducts);
+    }
+
     if (loading === false) {
-      localStorage.setItem("cartProducts", JSON.stringify(products));
+      localStorage.setItem("cartProducts", JSON.stringify(newCartProducts));
     }
     navigate("/cart");
   };
