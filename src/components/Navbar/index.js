@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 // import { logo } from "../../../public/images/logo.jpg";
+import { UserContext } from "../../UserContext";
+import { useContext } from "react";
 
 const Navbar = () => {
+  const { isUserLoggedIn } = useContext(UserContext);
   return (
     <nav className={styles.nav_container}>
       <div className={styles.inner_container}>
@@ -13,9 +16,7 @@ const Navbar = () => {
         </div>
         <div className={styles.links_container}>
           <ul>
-            <Link to="/login">
-              <li>Log In</li>
-            </Link>
+            <Link to="/">{isUserLoggedIn ? "" : <li>Log In</li>}</Link>
             <li>
               <Link to="about-us">About Us</Link>
             </li>

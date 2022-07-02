@@ -6,7 +6,6 @@ import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import Navbar from "./components/Navbar";
 import AboutUs from "./pages/AboutUs";
-import LogIn from "./pages/LogIn";
 import Cart from "./components/Cart";
 
 const AppRoutes = () => {
@@ -16,7 +15,6 @@ const AppRoutes = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LogIn />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/:details" element={<ProductDetails />} />
           <Route path="/about-us" element={<AboutUs />} />
