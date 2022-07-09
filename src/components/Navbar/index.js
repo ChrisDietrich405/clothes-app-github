@@ -11,21 +11,24 @@ const Navbar = () => {
     <nav className={styles.nav_container}>
       <div className={styles.inner_container}>
         <div className={styles.logo_container}>
-          <img src="../../../public/images/logo.jpg" alt="" />
-          <p>hey</p>
+          {/* <img src="../../../public/images/logo.jpg" alt="" /> */}
+          <p>Jhonson's Best</p>
         </div>
         <div className={styles.links_container}>
           <ul>
             <Link to="/">{isUserLoggedIn ? "" : <li>Log In</li>}</Link>
             <li>
-              <Link to="about-us">About Us</Link>
+              <Link to="/about-us">About Us</Link>
+            </li>
+            <li>
+              <Link to="/products">Products</Link>
             </li>
 
             <li>Our Story</li>
             <li>Contact Us</li>
             <li>Additional Stuff</li>
-            <Link to="/cart">
-              <span class="material-symbols-outlined">shopping_cart</span>
+            <Link className={styles.cart_button} to="/cart">
+              <span className="material-symbols-outlined">shopping_cart</span>
             </Link>
           </ul>
         </div>

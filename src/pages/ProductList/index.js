@@ -7,11 +7,14 @@ import styles from "./styles.module.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const fetchProducts = async () => {
+    setLoading(true);
     const response = await api.get("products");
     const { data } = response;
     setProducts(data);
-    console.log(products);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -19,11 +22,17 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div className={styles.product_container}>
-      {products.map((productItem) => {
-        return <ProductCard key={productItem.id} {...productItem} />;
-      })}
-    </div>
+    <>
+      {loading ? (
+        <p>Products are loading</p>
+      ) : (
+        <div className={styles.product_container}>
+          {products.map((productItem) => {
+            return <ProductCard key={productItem.id} {...productItem} />;
+          })}
+        </div>
+      )}
+    </>
   );
 };
 

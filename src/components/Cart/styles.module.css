@@ -45,8 +45,10 @@
 }
 
 .cart_summary_container {
+  position: fixed;
+  right: 0px;
   height: 40vh;
-  width: 50vw;
+  width: 30vw;
   margin: 30px;
   border: 1px solid #000;
   border-radius: 7px;
