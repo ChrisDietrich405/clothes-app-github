@@ -64,11 +64,11 @@ const ProductDetails = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.product_details_container}>
       {loading ? (
         <TailSpin color="#00BFFF" height={80} width={80} />
       ) : (
-        <div className={styles.product_details_container}>
+      <div>
           <h4>{productData.title}</h4>
           <img src={productData.image} alt={productData.title} />
           <p>{productData.description}</p>
@@ -77,9 +77,9 @@ const ProductDetails = () => {
           ) : (
             <button onClick={() => navigate("/")}>Log In</button>
           )}
-        </div>
+      </div>
       )}
-    </>
+    </div>
   );
 };
 

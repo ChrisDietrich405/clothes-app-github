@@ -8,13 +8,19 @@ const ProductCard = ({ id, image, price, description, title }) => {
   const handleNavigateToDetailsPage = () => {
     navigate(`/${id}`);
   };
+  const formatter = Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
   return (
     <div className={styles.product_container}>
       <h5>{title}</h5>
       <img src={image} alt={title} />
-      <p>{price}</p>
-      <button onClick={handleNavigateToDetailsPage}>details</button>
+      <div>
+        <p>{formatter.format(price)}</p>
+        <button onClick={handleNavigateToDetailsPage}>Details</button>
+      </div>
     </div>
   );
 };

@@ -10,7 +10,6 @@ import Cart from "./components/Cart";
 
 const AppRoutes = () => {
   return (
-    <>
       <Router>
         <Navbar />
         <Routes>
@@ -21,7 +20,6 @@ const AppRoutes = () => {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
-    </>
   );
 };
 

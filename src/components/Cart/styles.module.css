@@ -13,6 +13,7 @@
 .product_container {
   width: 38vw;
   display: flex;
+  background: white;
   align-items: center;
   margin: 30px;
   padding: 20px;
@@ -48,6 +49,7 @@
   position: fixed;
   right: 0px;
   height: 40vh;
+  background: white;
   width: 30vw;
   margin: 30px;
   border: 1px solid #000;

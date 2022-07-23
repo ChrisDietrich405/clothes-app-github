@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../services/api";
 
 import ProductCard from "../ProductCard";
+import { TailSpin } from "react-loader-spinner";
 
 import styles from "./styles.module.css";
 
@@ -22,9 +23,10 @@ const ProductList = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.product_list_container}>
+      <h1>Product List</h1>
       {loading ? (
-        <p>Products are loading</p>
+        <TailSpin color="#00BFFF" height={80} width={80} />
       ) : (
         <div className={styles.product_container}>
           {products.map((productItem) => {
@@ -32,7 +34,7 @@ const ProductList = () => {
           })}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
