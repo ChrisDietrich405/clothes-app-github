@@ -24,9 +24,10 @@ const Navbar = () => {
               <Link to="/products">Products</Link>
             </li>
 
-            <li>Our Story</li>
-            <li>Contact Us</li>
-            <li>Additional Stuff</li>
+            <li>
+              {" "}
+              <Link to="/contact">Contact</Link>
+            </li>
             <Link className={styles.cart_button} to="/cart">
               <span className="material-symbols-outlined">shopping_cart</span>
             </Link>
