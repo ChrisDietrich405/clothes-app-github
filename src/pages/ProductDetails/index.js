@@ -71,7 +71,7 @@ const ProductDetails = () => {
       <div>
           <h4>{productData.title}</h4>
           <img src={productData.image} alt={productData.title} />
-          <p>{productData.description}</p>
+          <p className={styles.product_details_paragraph}>{productData.description}</p>
           {isUserLoggedIn ? (
             <button onClick={handleAddToCart}>Add to Cart</button>
           ) : (
