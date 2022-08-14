@@ -16,54 +16,49 @@ function Contact() {
 
   return (
     <>
-      <div>
+      <div className={styles.container}>
+        <div className={styles.title_container}>
+          <h1>Love to hear from you,</h1>
+          <h1>Get in Touch👋</h1>
+        </div>
         <form className={styles.form_container} onSubmit={submit}>
-          <h2>Get in touch!</h2>
-          <div>
-            <label htmlFor="name">
-              First Name
+          <div className={styles.grid_input}>
+            <div className={styles.input_container}>
+              <label htmlFor="name">Name</label>
+
               <input
                 ref={inputRef}
                 type="text"
                 id="name"
+                placeholder="Chris Dietrich"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="name">
-              Last Name
-              <input
-                type="text"
-                id="name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="email">
-              Email
+            </div>
+           
+
+            <div className={styles.input_container}>
+              <label htmlFor="email">Email</label>
+
               <input
                 type="text"
                 id="email"
+                placeholder="chrisdietrich@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </label>
-          </div>
-          <div>
-            <label>
-              Message
+            </div>
+            <div className={styles.input_container}>
+              <label>Message </label>
               <textarea
+              className={styles.text_area_container}
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-            </label>
+            </div>
           </div>
-          <button type="submit" className="sign-in-button">
+          <button type="submit" className={styles.submit_btn}>
             Submit
           </button>
         </form>
