@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 // import { logo } from "../../../public/images/logo.jpg";
 import { UserContext } from "../../UserContext";
 import { useContext } from "react";
 
+import logo from "./jhonsons-logo.png";
+
 const Navbar = () => {
+  const [hideNavbar, setHideNavbar] = useState(false);
   const { isUserLoggedIn } = useContext(UserContext);
   return (
     <nav className={styles.nav_container}>
+      <span
+        onClick={() => setHideNavbar(!hideNavbar)}
+        className={`material-symbols-outlined ${styles.hamburger}`}
+      >
+        menu
+      </span>
       <div className={styles.inner_container}>
         <div className={styles.logo_container}>
-          {/* <img src="../../../public/images/logo.jpg" alt="" /> */}
-          <p>Jhonson's Best</p>
+          <Link to="/">
+            <img
+              src={logo}
+              alt="logo"
+              style={{ width: "65px", margin: "0px" }}
+            />
+          </Link>
         </div>
-        <div className={styles.links_container}>
+
+        <div
+          className={
+            hideNavbar
+              ? `${styles.hide_navbar} ${styles.links_container}`
+              : styles.links_container
+          }
+        >
           <ul>
             <Link to="/">{isUserLoggedIn ? "" : <li>Log In</li>}</Link>
             <li>
