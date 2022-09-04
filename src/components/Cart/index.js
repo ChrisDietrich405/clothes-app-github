@@ -64,6 +64,12 @@ const Cart = () => {
 
   return (
     <div className={styles.cart_container}>
+      <div className={styles.cart_summary_container}>
+        <h3>Cart Summary</h3>
+        <p>Total: {cartTotal.totalItems}</p>
+        <p>Total Price: ${cartTotal.totalPrice?.toFixed(2)}</p>
+        <button onClick={() => navigate("/products")}>Back to Products</button>
+      </div>
       <ul className={styles.list_container}>
         {cartProducts.map((product) => {
           return (
@@ -83,12 +89,6 @@ const Cart = () => {
           );
         })}
       </ul>
-      <div className={styles.cart_summary_container}>
-        <h3>Cart Summary</h3>
-        <p>Total: {cartTotal.totalItems}</p>
-        <p>Total Price: ${cartTotal.totalPrice?.toFixed(2)}</p>
-        <button onClick={() => navigate("/products")}>Back to Products</button>
-      </div>
     </div>
   );
 };

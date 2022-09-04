@@ -1,10 +1,16 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f2f2f7;
+}
+
+button {
+  margin-top: 20px;   
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  border: none;
+  background: #add8e6;
+}
+
+button:hover {
+  cursor: pointer;
 }
