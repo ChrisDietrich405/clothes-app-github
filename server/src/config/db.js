@@ -1,9 +1,9 @@
-const mysql = require("mysql2");
+import mysql from "mysql2/promise";
 
-const connection = mysql.createConnection({
+const connection = await mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "secret",
+  password: "",
   database: "clothes",
   port: 3306,
 });
@@ -16,4 +16,4 @@ connection.connect((err) => {
   console.log("Connected to the MySQL database.");
 });
 
-module.exports = connection;
+export default connection;
