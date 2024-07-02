@@ -1,6 +1,6 @@
 import express from "express";
 import connection from "../config/db.js";
-import { Product } from "../entities/productModels.js";
+// import { Product } from "../entities/productModels.js";
 
 const router = express.Router();
 

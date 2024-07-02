@@ -1,6 +1,6 @@
 import express from "express";
 import mysql from "mysql2";
-// import { connection } from "./config/db";
+import connection from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 
@@ -15,16 +15,16 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-// const syncDB = async () => {
-//   try {
-//     await connection();
-//     console.log("Connection successful");
-//   } catch (error) {
-//     console.log("Not connecting to database");
-//   }
-// };
+const syncDB = async () => {
+  try {
+    await connection();
+    console.log("Connection successful");
+  } catch (error) {
+    console.log("Not connecting to database");
+  }
+};
 
-// syncDB();
+syncDB();
 
 
 

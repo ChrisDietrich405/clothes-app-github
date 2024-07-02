@@ -1,15 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+// import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
-export class Product {
-  @PrimaryGeneratedColumn()
-  id;
+// @Entity()
+// export class Product {
+//   @PrimaryGeneratedColumn()
+//   id;
 
-  @Column()
-  brand_name;
+//   @Column()
+//   brand_name;
 
-  @Column("decimal", { precision: 10, scale: 2 })
-  price;
+//   @Column("decimal", { precision: 10, scale: 2 })
+//   price;
 
 //   @Column()
 //   description: string;
@@ -19,4 +19,4 @@ export class Product {
 
 //   @Column({ default: true })
 //   inStock: boolean;
-}
+// }
