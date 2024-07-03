@@ -1,6 +1,5 @@
 import express from "express";
 import mysql from "mysql2";
-// import connection from "./config/db.js";
 import sequelize from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
