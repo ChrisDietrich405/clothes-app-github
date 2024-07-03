@@ -1,6 +1,7 @@
 import express from "express";
 import mysql from "mysql2";
-import connection from "./config/db.js";
+// import connection from "./config/db.js";
+import sequelize from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 
@@ -17,16 +18,25 @@ app.get("/", (req, res) => {
 
 const syncDB = async () => {
   try {
-    await connection();
-    console.log("Connection successful");
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
   } catch (error) {
-    console.log("Not connecting to database");
+    console.error("Unable to connect to the database:", error);
   }
 };
 
 syncDB();
 
+// const syncDB = async () => {
+//   try {
+//     await connection();
+//     console.log("Connection successful");
+//   } catch (error) {
+//     console.log("Not connecting to database");
+//   }
+// };
 
+// syncDB();
 
 app.listen("3000", () => {
   console.log("hello world");
