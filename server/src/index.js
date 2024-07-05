@@ -1,14 +1,16 @@
 import express from "express";
-import bodyParser from "body-parser";
+import dotenv from "dotenv";
+
 import sequelize from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 
 const app = express();
+dotenv.config();
+
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
@@ -28,18 +30,7 @@ const syncDB = async () => {
 
 syncDB();
 
-// const syncDB = async () => {
-//   try {
-//     await connection();
-//     console.log("Connection successful");
-//   } catch (error) {
-//     console.log("Not connecting to database");
-//   }
-// };
-
-// syncDB();
-
-app.listen("3000", () => {
+app.listen(port, () => {
   console.log("hello world");
 });
 
