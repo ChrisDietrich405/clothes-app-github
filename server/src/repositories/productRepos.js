@@ -5,9 +5,8 @@ const getProducts = async () => {
   return allProducts;
 };
 
-// const addProducts = async (req, res) => {
-//   const { id, name, price } = req.body;
-//   console.log(name);
-// };
+const addProducts = async (id, name, price) => {
+  return await Products.create({id, name, price})
+};
 
-export default getProducts 
+export { getProducts, addProducts };

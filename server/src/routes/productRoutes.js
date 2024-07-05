@@ -6,16 +6,8 @@ import {
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const data = await getProductsController();
-  res.status(200).json(data);
-});
+router.get("/", getProductsController);
 
-router.post("/", async (req, res) => {
-  const data = addProductsController();
-  console.log(data);
-  // const data = await addProductsController();
-  // res.status(200).json(data);
-});
+router.post("/", addProductsController)
 
 export default router;

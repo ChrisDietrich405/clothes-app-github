@@ -1,5 +1,5 @@
 import express from "express";
-import mysql from "mysql2";
+import bodyParser from "body-parser";
 import sequelize from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
@@ -7,6 +7,8 @@ import userRouter from "./routes/userRoutes.js";
 const app = express();
 
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
