@@ -5,8 +5,26 @@ const getProducts = async () => {
   return allProducts;
 };
 
-const addProducts = async (id, name, price) => {
-  return await Products.create({id, name, price})
+const addProducts = async (id, brand_name, price) => {
+  console.log("hlell")
+  return await Products.create({ id, brand_name, price });
 };
 
-export { getProducts, addProducts };
+const deleteProduct = async (id) => {
+  const result = Products.destroy({ where: { id } });
+  return result;
+};
+
+const updateProduct = async (id, brand_name, price) => {
+  const result = Products.update(
+    { brand_name, price },
+    {
+      where: {
+        id,
+      },
+    }
+  );
+};
+
+
+export { getProducts, addProducts, deleteProduct, updateProduct };

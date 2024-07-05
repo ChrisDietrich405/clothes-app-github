@@ -1,4 +1,9 @@
-import { addProducts, getProducts } from "../repositories/productRepos.js";
+import {
+  addProducts,
+  getProducts,
+  deleteProduct,
+  updateProduct,
+} from "../repositories/productRepos.js";
 
 const getProductsController = async (req, res) => {
   try {
@@ -13,18 +18,50 @@ const getProductsController = async (req, res) => {
 };
 
 const addProductsController = async (req, res) => {
-  const data = await addProducts(req.body.id, req.body.name, req.body.price);
-  console.log("HELLO", data);
-  return res.status(201).json(data);
-  // try {
-  //   const data = await addProducts();
-  //   if (!data) {
-  //     return res.status(404).json({ message: "Products not found" });
-  //   }
-  //   return data;
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  if (!req.body.id || !req.body.brand_name || !req.body.price) {
+    return res
+      .status(400)
+      .json({ message: "Please add all necessary information" });
+  }
+
+  try {
+    const data = await addProducts(
+      req.body.id,
+      req.body.brand_name,
+      req.body.price
+    );
+    console.log(data);
+    return res.status(201).json(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export { getProductsController, addProductsController };
+const deleteProductController = async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).json({ message: "Please add id" });
+  }
+  deleteProduct(req.body.id);
+};
+
+const updateProductController = async (req, res) => {
+  if (!req.body.id || !req.body.brand_name || !req.body.price) {
+    return res
+      .status(400)
+      .json({ message: "Missing required fields in request body" });
+  }
+  const updatedProduct = updateProduct(
+    req.body.id,
+    req.body.brand_name,
+    req.body.price
+  );
+
+  return res.status(200).json({ message: "Product updated successfully" });
+};
+
+export {
+  getProductsController,
+  addProductsController,
+  deleteProductController,
+  updateProductController,
+};
