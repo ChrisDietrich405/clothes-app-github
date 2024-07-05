@@ -1,67 +1,83 @@
-import {
-  addProducts,
-  getProducts,
-  deleteProduct,
-  updateProduct,
-} from "../repositories/productRepos.js";
+import * as ProductRepos from "../repositories/productRepos.js";
 
-const getProductsController = async (req, res) => {
+const getAll = async (req, res) => {
   try {
-    const data = await getProducts();
-    if (!data) {
+    const products = await ProductRepos.getAll();
+    if (!products) {
       return res.status(404).json({ message: "Products not found" });
     }
-    return res.status(200).json({ message: "Data received", data });
+    return res.status(200).json(products);
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: "Error while listing products" });
   }
 };
 
-const addProductsController = async (req, res) => {
-  if (!req.body.id || !req.body.brand_name || !req.body.price) {
+const getOne = async (req, res) => {
+  try {
+    const product = await ProductRepos.getOne(req.query.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.status(200).json(product);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error while listing product" });
+  }
+};
+
+const add = async (req, res) => {
+  if (!req.body.brand_name || !req.body.price) {
     return res
       .status(400)
       .json({ message: "Please add all necessary information" });
   }
 
   try {
-    const data = await addProducts(
-      req.body.id,
+    const product = await ProductRepos.add(
       req.body.brand_name,
       req.body.price
     );
-    console.log(data);
-    return res.status(201).json(data);
+    return res.status(201).json(product);
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: "Error while adding product" });
   }
 };
 
-const deleteProductController = async (req, res) => {
+const remove = async (req, res) => {
   if (!req.body.id) {
     return res.status(400).json({ message: "Please add id" });
   }
-  deleteProduct(req.body.id);
-};
-
-const updateProductController = async (req, res) => {
-  if (!req.body.id || !req.body.brand_name || !req.body.price) {
-    return res
-      .status(400)
-      .json({ message: "Missing required fields in request body" });
+  try {
+    ProductRepos.remove(req.body.id);
+    return res.status(200).json({ message: "Deleted product successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error while removing product" });
   }
-  const updatedProduct = updateProduct(
-    req.body.id,
-    req.body.brand_name,
-    req.body.price
-  );
-
-  return res.status(200).json({ message: "Product updated successfully" });
 };
 
-export {
-  getProductsController,
-  addProductsController,
-  deleteProductController,
-  updateProductController,
+const update = async (req, res) => {
+  // if (!req.query.id || !req.body.brand_name || !req.body.price) {
+  //   return res
+  //     .status(400)
+  //     .json({ message: "Missing required fields in request body" });
+  // }
+  try {
+    const updatedProduct = ProductRepos.update(
+      req.query.id,
+      req.body.brand_name,
+      req.body.price
+    );
+
+    return res
+      .status(200)
+      .json({ message: "Product updated successfully", updatedProduct });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error while updating product" });
+  }
 };
+
+export { getAll, getOne, add, remove, update };

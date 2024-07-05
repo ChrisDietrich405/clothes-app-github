@@ -1,21 +1,25 @@
 import Products from "../models/productModels.js";
 
-const getProducts = async () => {
+const getAll = async () => {
   const allProducts = await Products.findAll();
   return allProducts;
 };
 
-const addProducts = async (id, brand_name, price) => {
-  console.log("hlell")
-  return await Products.create({ id, brand_name, price });
+const getOne = async (id) => {
+  const product = await Products.findOne(id);
+  return product;
 };
 
-const deleteProduct = async (id) => {
+const add = async (brand_name, price) => {
+  return await Products.create({ brand_name, price });
+};
+
+const remove = async (id) => {
   const result = Products.destroy({ where: { id } });
   return result;
 };
 
-const updateProduct = async (id, brand_name, price) => {
+const update = async (id, brand_name, price) => {
   const result = Products.update(
     { brand_name, price },
     {
@@ -24,7 +28,7 @@ const updateProduct = async (id, brand_name, price) => {
       },
     }
   );
+  return result;
 };
 
-
-export { getProducts, addProducts, deleteProduct, updateProduct };
+export { getAll, getOne, add, remove, update };
