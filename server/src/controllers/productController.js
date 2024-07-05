@@ -34,10 +34,7 @@ const add = async (req, res) => {
   }
 
   try {
-    const product = await ProductRepos.add(
-      req.body.brand_name,
-      req.body.price
-    );
+    const product = await ProductRepos.add(req.body.brand_name, req.body.price);
     return res.status(201).json(product);
   } catch (error) {
     console.log(error);
@@ -59,14 +56,15 @@ const remove = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  // if (!req.query.id || !req.body.brand_name || !req.body.price) {
-  //   return res
-  //     .status(400)
-  //     .json({ message: "Missing required fields in request body" });
-  // }
+  if (!req.params.id || !req.body.brand_name || !req.body.price) {
+    return res
+      .status(400)
+      .json({ message: "Missing required fields in request body" });
+  }
   try {
-    const updatedProduct = ProductRepos.update(
-      req.query.id,
+    console.log(req.query.id, req.body.brand_name, req.body.price);
+    const updatedProduct = await ProductRepos.update(
+      req.params.id,
       req.body.brand_name,
       req.body.price
     );
