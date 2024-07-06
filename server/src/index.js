@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import sequelize from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import authRouter from "./routes/authRoute.js";
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
