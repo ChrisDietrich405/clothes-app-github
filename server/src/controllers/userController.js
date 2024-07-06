@@ -6,11 +6,17 @@ const getUsers = async (req, res) => {
   return res.status(200).json({ message: "Received all users", users });
 };
 
+const getOneUser = async (req, res) => {
+  console.log("helloooo");
+  const { id } = req.query;
+};
+
 const registerUser = async (req, res) => {
   try {
-    const { first_name, last_name, password } = req.body;
+    const { first_name, last_name, email, password } = req.body;
+    console.log(first_name);
 
-    if (!first_name || !last_name || !password) {
+    if (!first_name || !last_name || !email || !password) {
       return res.status(400).json({ message: "Please add all information" });
     }
 
@@ -19,6 +25,7 @@ const registerUser = async (req, res) => {
     const newUser = await UserRepos.registerUser(
       first_name,
       last_name,
+      email,
       hashedPassword
     );
     console.log(newUser);
@@ -32,4 +39,4 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { getUsers, registerUser };
+export { getUsers, registerUser, getOneUser };

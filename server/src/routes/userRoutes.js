@@ -8,6 +8,8 @@ router.get("/", UsersController.getUsers);
 
 router.post("/", UsersController.registerUser);
 
+router.post("/:id", UsersController.getOneUser);
+
 export default router;
 
 //registration on this page
