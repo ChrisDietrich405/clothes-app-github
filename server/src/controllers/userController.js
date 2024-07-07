@@ -1,5 +1,6 @@
 import generatePassword from "../helpers/generateBcryptPassword.js";
 import * as UserRepos from "../repositories/userRepos.js";
+import Users from "../models/userModels.js";
 
 const getUsers = async (req, res) => {
   const users = await UserRepos.getUsers();
@@ -7,8 +8,9 @@ const getUsers = async (req, res) => {
 };
 
 const getOneUser = async (req, res) => {
-  console.log("helloooo");
-  const { id } = req.query;
+  const { id } = req.user;
+  const user = await Users.findByPk(id);
+  console.log(user);
 };
 
 const registerUser = async (req, res) => {
