@@ -3,13 +3,13 @@ import * as ProductRepos from "../repositories/productRepos.js";
 const getAll = async (req, res) => {
   try {
     const products = await ProductRepos.getAll();
-    if (!products) {
-      return res.status(404).json({ message: "Products not found" });
-    }
     return res.status(200).json(products);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Error while listing products" });
+    if (error.message.includes("connect ECONNREFUSED")) {
+      return res.status(500).json("Problems getting data");
+    }   
+      return res.status(500).json(error.message);
+ 
   }
 };
 

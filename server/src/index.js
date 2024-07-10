@@ -5,6 +5,7 @@ import sequelize from "./config/db.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import authRouter from "./routes/authRoute.js";
+import cartRouter from "./routes/cartRoute.js";
 
 import authMiddleware from "./middleware/authMiddleware.js";
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/carts", cartRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
