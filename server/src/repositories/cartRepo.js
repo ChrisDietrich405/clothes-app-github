@@ -5,4 +5,13 @@ const getAll = async () => {
   return allCarts;
 };
 
-export { getAll }
+const getUserCart = async (userId) => {
+  const userCart = await Cart.findAll({
+    where: {
+      user_id: userId,
+    },
+  });
+  return userCart;
+};
+
+export { getAll, getUserCart };

@@ -12,8 +12,8 @@ const getCarts = async (req, res) => {
 };
 
 const getUserCart = async (req, res) => {
-  const userId = req.user.id;
-  console.log(userId);
+  const userCart = await CartRepos.getUserCart(req.user.id);
+  res.status(200).json(userCart);
 };
 
 export { getCarts, getUserCart };

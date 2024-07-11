@@ -41,4 +41,6 @@ const registerUser = async (req, res) => {
   }
 };
 
+
+
 export { getUsers, registerUser, getOneUser };
