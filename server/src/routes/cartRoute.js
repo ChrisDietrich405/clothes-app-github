@@ -6,14 +6,8 @@ const router = express.Router();
 
 router.get("/", CartController.getCarts);
 
-router.get("/:id", authMiddleware, CartController.getUserCart);
+router.get("/view-user-cart", authMiddleware, CartController.viewUserCart);
 
-// router.get("/:id", ProductsController.getOne);
-
-// router.post("/", ProductsController.add);
-
-// router.delete("/", ProductsController.remove);
-
-// router.put("/:id", ProductsController.update);
+router.post("/add-to-cart", authMiddleware, CartController.addToCart);
 
 export default router;

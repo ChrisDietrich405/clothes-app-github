@@ -11,9 +11,14 @@ const getCarts = async (req, res) => {
   }
 };
 
-const getUserCart = async (req, res) => {
-  const userCart = await CartRepos.getUserCart(req.user.id);
+const viewUserCart = async (req, res) => {
+  const userCart = await CartRepos.viewUserCart(req.user.id);
   res.status(200).json(userCart);
 };
 
-export { getCarts, getUserCart };
+const addToCart = () => {
+  console.log("hello chris");
+  
+};
+
+export { getCarts, viewUserCart, addToCart };

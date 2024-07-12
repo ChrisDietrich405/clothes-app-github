@@ -5,7 +5,7 @@ const getAll = async () => {
   return allCarts;
 };
 
-const getUserCart = async (userId) => {
+const viewUserCart = async (userId) => {
   const userCart = await Cart.findAll({
     where: {
       user_id: userId,
@@ -14,4 +14,4 @@ const getUserCart = async (userId) => {
   return userCart;
 };
 
-export { getAll, getUserCart };
+export { getAll, viewUserCart };
